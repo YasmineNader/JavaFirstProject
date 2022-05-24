@@ -43,8 +43,8 @@ public class FormDesign extends JFrame implements ActionListener {
       update
     }
     actions action;
-    List<InvoiceHeader> myList = new ArrayList<InvoiceHeader>();
-    List<InvoiceItems> listDetails = new ArrayList<InvoiceItems>();
+//    List<InvoiceHeader> myList = new ArrayList<InvoiceHeader>();
+//    List<InvoiceItems> listDetails = new ArrayList<InvoiceItems>();
     private double[] x;
 OperationController controller = new OperationController();
 private void ClearTextData(){
@@ -132,8 +132,12 @@ public void setFormLayout(){
     customerInvoiceTable.add(cancel);
     add(mainPanel);
     //Form
-    setSize(1000, 600);
-    setLocation(0, 0);
+//    setSize(1000, 600);
+//    setLocation(0, 0);
+    Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
+    setMaximumSize(DimMax);
+
+    setExtendedState(JFrame.MAXIMIZED_BOTH);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -180,10 +184,10 @@ public void setFormLayout(){
                 detailsModelTable.setNumRows(0);
                 int totalInvoice = 0;
 
-                for (int i = 0; i < listDetails.toArray().length; i++) {
+                for (int i = 0; i < controller.myInvoiceListItemLength(); i++) {
 
-                    if (dataId == listDetails.get(i).invoiceNumber){
-                        InvoiceItems tableRow = listDetails.get(i);
+                    if (dataId == controller.myInvoiceItems(i).invoiceNumber){
+                        InvoiceItems tableRow = controller.myInvoiceItems(i);
                         float totalCount = tableRow.itemPrice * tableRow.numberOfItemsPurchased;
                         totalInvoice += totalCount;
                         tableRow.totalInvoice = totalCount;

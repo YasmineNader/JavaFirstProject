@@ -193,6 +193,18 @@ public int myListLength(){
 
     }
 
+    public InvoiceItems myInvoiceItems(int i){
 
+        return listDetails.get(i);
+
+
+    }
+
+    public int myInvoiceListItemLength(){
+
+        return listDetails.toArray().length;
+
+
+    }
 
 }
