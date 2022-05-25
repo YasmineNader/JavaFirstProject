@@ -311,13 +311,13 @@ public void setFormLayout(){
 
     public void creatNewInvoice(){
     action = actions.save;
-        int count=0;
-        for (int i = 1; i <= controller.myListLength(); i++){
+//        int count=0;
+//        for (int i = 1; i <= controller.myListLength(); i++){
+//
+//            count+=1;
+//        }
 
-            count+=1;
-        }
-
-        invoiceNumber.setText(String.valueOf(count+1));
+        invoiceNumber.setText(String.valueOf(controller.myListLength()+1));
        ClearTextData();
 
 
