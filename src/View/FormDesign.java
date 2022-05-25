@@ -182,7 +182,7 @@ public void setFormLayout(){
 
 
                 detailsModelTable.setNumRows(0);
-                int totalInvoice = 0;
+                float totalInvoice = 0;
 
                 for (int i = 0; i < controller.myInvoiceListItemLength(); i++) {
 
@@ -195,7 +195,7 @@ public void setFormLayout(){
                     }
 
                 }
-                invoiceSum.setText(Integer.toString(totalInvoice));
+                invoiceSum.setText(Float.toString(totalInvoice));
 
             }
 
@@ -249,15 +249,17 @@ public void setFormLayout(){
 
     public void cancelUpdate() {
 
-         String dataId;
+        String dataId;
         int selectedRow = invoiceTable.getSelectedRow();
         ClearTextData();
         dataId = invoiceTable.getValueAt(selectedRow, 0).toString();
         String invdate = (String) invoiceTable.getValueAt(selectedRow, 1);
         String name = (String) invoiceTable.getValueAt(selectedRow, 2);
+        float invoicetot = (float) invoiceTable.getValueAt(selectedRow, 3);
         invoiceNumber.setText(dataId);
         invoiceDate.setText(invdate);
         customerName.setText(name);
+        invoiceSum.setText(Float.toString(invoicetot));
 
 
     }

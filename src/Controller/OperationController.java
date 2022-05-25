@@ -41,15 +41,19 @@ public class OperationController {
                 myList.add(invoice);
             }
 
-            int counter = 0;
+            double counter = 0;
             for (int i = 0; i < myList.toArray().length; i++) {
                 InvoiceHeader tableRow = myList.get(i);
 
-                counter= (int) listDetails.stream().filter(listRow -> listRow.invoiceNumber == tableRow.InvoiceNumber).count();
+                counter= (double)
+                        listDetails.stream().
+                                filter(listRow -> listRow.invoiceNumber == tableRow.InvoiceNumber)
+                                .map((list)->list.numberOfItemsPurchased*list.itemPrice).mapToDouble(Float::doubleValue).sum();
 
-                tableRow.totalInvoice = counter;
+                tableRow.totalInvoice =(float) counter;
                 dtm.addRow(tableRow.getArray());
             }
+
 
 
             br.close();
