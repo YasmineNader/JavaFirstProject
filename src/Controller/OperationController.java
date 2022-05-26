@@ -18,6 +18,7 @@ public class OperationController {
     private DefaultTableModel detailsModelTable;
     private String detailsFilePath;
     private JTable invoiceTable;
+    private JTable invoiceItems;
     List<InvoiceHeader>
             myList = new ArrayList<InvoiceHeader>();
     List<InvoiceItems> listDetails = new ArrayList<InvoiceItems>();
@@ -116,17 +117,20 @@ public class OperationController {
 
 
     public void deleteRow(DefaultTableModel detailsModelTable,JTable invoiceTable,DefaultTableModel dtm) {
-        int rowId;
-        int selectedRow;
-        selectedRow = invoiceTable.getSelectedRow();
-        rowId = (int) invoiceTable.getValueAt(selectedRow, 0);
-        if (selectedRow != -1) {
-            dtm.removeRow(selectedRow);
-        }
-        listDetails = listDetails.stream().filter(listRow -> listRow.invoiceNumber != rowId).toList();
-        myList = myList.stream().filter(myrow -> myrow.InvoiceNumber != rowId).toList();
-        detailsModelTable.setNumRows(0);
+        int action = JOptionPane.showConfirmDialog(null, "Do you want Really to delete", "Delete", JOptionPane.CANCEL_OPTION);
+        if (action == 0) {
+            int rowId;
+            int selectedRow;
+            selectedRow = invoiceTable.getSelectedRow();
+            rowId = (int) invoiceTable.getValueAt(selectedRow, 0);
+            if (selectedRow != -1) {
+                dtm.removeRow(selectedRow);
+            }
+            listDetails = listDetails.stream().filter(listRow -> listRow.invoiceNumber != rowId).toList();
+            myList = myList.stream().filter(myrow -> myrow.InvoiceNumber != rowId).toList();
+            detailsModelTable.setNumRows(0);
 
+        }
     }
 
 
@@ -211,4 +215,23 @@ public int myListLength(){
 
     }
 
+
+//    public void deleteDetails(DefaultTableModel detailsModelTable,JTable invoiceItems) {
+//        int action = JOptionPane.showConfirmDialog(null,"Do you want Really to delete","Delete",JOptionPane.CANCEL_OPTION);
+//        if(action==0) {
+//            int rowId;
+//            int selectedRow;
+//            selectedRow = invoiceItems.getSelectedRow();
+//            rowId = (int) invoiceItems.getValueAt(selectedRow, 0);
+//            if (selectedRow != -1) {
+//                detailsModelTable.removeRow(selectedRow);
+//            }
+//        }
+//   //     listDetails = listDetails.stream().filter(listRow -> listRow.invoiceNumber != rowId).toList();
+////        myList = myList.stream().filter(myrow -> myrow.InvoiceNumber != rowId).toList();
+////        detailsModelTable.setNumRows(0);
+//
+//    }
+
 }
+

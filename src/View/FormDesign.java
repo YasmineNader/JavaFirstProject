@@ -38,6 +38,15 @@ public class FormDesign extends JFrame implements ActionListener {
     private JLabel invoiceNumber;
     private String mainFilePath;
     private String detailsFilePath;
+    private JButton deleteDetails;
+    private JButton addDetails;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+
     enum actions{
       save,
       update
@@ -54,91 +63,249 @@ private void ClearTextData(){
 
 }
 
+    private void initComponents() {
+
+        jScrollPane1 = new JScrollPane();
+        invoiceTable = new JTable();
+        deleteInvoice = new JButton();
+        newInvoice = new JButton();
+        jScrollPane2 = new JScrollPane();
+        invoiceItems = new JTable();
+        saveUpdate = new JButton();
+        cancel = new JButton();
+        invoiceNumber = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        jLabel4 = new JLabel();
+        invoiceDate = new JTextField();
+        customerName = new JTextField();
+        invoiceSum = new JLabel();
+        jLabel6 = new JLabel();
+        addDetails = new JButton();
+        deleteDetails = new JButton();
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu();
+        loadFileItem = new JMenuItem();
+        SaveFileItem = new JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.setViewportView(invoiceTable);
+
+        deleteInvoice.setText("Delete Invoice");
+
+
+        newInvoice.setText("Create New Invoice");
+
+
+        jScrollPane2.setViewportView(invoiceItems);
+
+        saveUpdate.setText("Save Update");
+
+        cancel.setText("Cancel");
+
+        jLabel2.setText("Invoice Date");
+
+        jLabel3.setText("Customer Name");
+
+        jLabel4.setText("Invoice Total");
+
+
+        jLabel6.setText("Invoice Number");
+
+        addDetails.setText("Add Details");
+
+
+        deleteDetails.setText("Delete Details");
+
+
+        fileMenu.setText("File");
+
+        loadFileItem.setText("Load File");
+
+        fileMenu.add(loadFileItem);
+
+        SaveFileItem.setText("Save File");
+        fileMenu.add(SaveFileItem);
+
+        menuBar.add(fileMenu);
+
+        setJMenuBar(menuBar);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(51, 51, 51)
+                                                .addComponent(newInvoice)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(deleteInvoice)))
+                                .addGap(69, 69, 69)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(saveUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(jLabel4)
+                                                        .addComponent(jLabel6))
+                                                .addGap(109, 109, 109)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(invoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                                        .addComponent(customerName)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(invoiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(29, 29, 29))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(28, 28, 28)
+                                                                .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(newInvoice)
+                                                        .addComponent(deleteInvoice))
+                                                .addContainerGap(182, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel6))
+                                                .addGap(36, 36, 36)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(36, 36, 36)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(customerName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(44, 44, 44)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(invoiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel4))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(saveUpdate)
+                                                        .addComponent(cancel))
+                                                .addGap(11, 11, 11))))
+        );
+
+        pack();
+    }// </editor-fold>
 public void setFormLayout(){
 
-    mainPanel = new JPanel(new GridLayout(1, 2));
-    leftPanel = new JPanel(new FlowLayout());
-    rightPanel = new JPanel(new GridLayout(2, 1));
-    customerPanel = new JPanel(new GridLayout(4, 2));
-    customerInvoiceTable=new JPanel(new FlowLayout());
-    rightPanel.add(customerPanel);
+
+//    mainPanel = new JPanel(new GridLayout(1, 2));
+//    leftPanel = new JPanel(new FlowLayout());
+//    rightPanel = new JPanel(new GridLayout(2, 1));
+//    customerPanel = new JPanel(new GridLayout(4, 2));
+//    customerInvoiceTable=new JPanel(new FlowLayout());
+//    rightPanel.add(customerPanel);
 
 
 
 
-    mainPanel.add(leftPanel);
-    mainPanel.add(rightPanel);
+//    mainPanel.add(leftPanel);
+//    mainPanel.add(rightPanel);
 
     //Menu
 
-    menuBar = new JMenuBar();
-    loadFileItem = new JMenuItem("Load File");
+//    menuBar = new JMenuBar();
+//    loadFileItem = new JMenuItem("Load File");
     loadFileItem.addActionListener(this);
     loadFileItem.setActionCommand("load");
-    SaveFileItem = new JMenuItem("Save File");
+//    SaveFileItem = new JMenuItem("Save File");
     SaveFileItem.addActionListener(this);
     SaveFileItem.setActionCommand("save");
 
-    fileMenu = new JMenu("File");
-    fileMenu.add(loadFileItem);
-    fileMenu.add(SaveFileItem);
-    menuBar.add(fileMenu);
-    setJMenuBar(menuBar);
+//    fileMenu = new JMenu("File");
+//    fileMenu.add(loadFileItem);
+//    fileMenu.add(SaveFileItem);
+//    menuBar.add(fileMenu);
+//    setJMenuBar(menuBar);
     //Table
 
 
-    invoiceTable = new JTable();
-    leftPanel.add(new JScrollPane(invoiceTable));
+//    invoiceTable = new JTable();
+//    leftPanel.add(new JScrollPane(invoiceTable));
 
 
     //Buttons
-    newInvoice = new JButton("Create New Invoice");
-    leftPanel.add(newInvoice);
-    deleteInvoice = new JButton("Delete Invoice");
-    leftPanel.add(deleteInvoice);
+//    newInvoice = new JButton("Create New Invoice");
+//    leftPanel.add(newInvoice);
+//    deleteInvoice = new JButton("Delete Invoice");
+//    leftPanel.add(deleteInvoice);
 
 
-    JLabel invoiceLabel =new JLabel("Invoice Number");
-    customerPanel.add(invoiceLabel);
-    invoiceNumber = new JLabel();
-
-    customerPanel.add((invoiceNumber));
-    invoiceDate = new JTextField("");
-    customerPanel.add(new JLabel("Invoice Date"));
-
-    customerPanel.add(invoiceDate);
-
-    customerName = new JTextField("");
-    customerPanel.add(new JLabel("Customer Name"));
-
-    customerPanel.add(customerName);
-
-    customerPanel.add(new JLabel("Invoice Total"));
-    invoiceSum = new JLabel();
-    customerPanel.add(invoiceSum);
-
-    rightPanel.add(customerPanel);
-
-    invoiceItems = new JTable();
-    customerInvoiceTable.add(new JScrollPane(invoiceItems));
-    rightPanel.add(customerInvoiceTable);
+//    JLabel invoiceLabel =new JLabel("Invoice Number");
+//    customerPanel.add(invoiceLabel);
+//    invoiceNumber = new JLabel();
+//
+//    customerPanel.add((invoiceNumber));
+//    invoiceDate = new JTextField("");
+//    customerPanel.add(new JLabel("Invoice Date"));
+//
+//    customerPanel.add(invoiceDate);
+//
+//    customerName = new JTextField("");
+//    customerPanel.add(new JLabel("Customer Name"));
+//
+//    customerPanel.add(customerName);
+//
+//    customerPanel.add(new JLabel("Invoice Total"));
+//    invoiceSum = new JLabel();
+//    customerPanel.add(invoiceSum);
+//
+//    rightPanel.add(customerPanel);
+//
+//    invoiceItems = new JTable();
+//    customerInvoiceTable.add(new JScrollPane(invoiceItems));
+//    rightPanel.add(customerInvoiceTable);
 
 
     //Buttons
-    saveUpdate = new JButton("saveUpdate");
-    customerInvoiceTable.add(saveUpdate);
+//    deleteDetails = new JButton("Delete Details");
+//    customerInvoiceTable.add(deleteDetails);
+//
+//    addDetails = new JButton("Add Details");
+//    customerInvoiceTable.add(addDetails);
+//    saveUpdate = new JButton("saveUpdate");
+//    customerInvoiceTable.add(saveUpdate);
+//
+//    cancel = new JButton("Cancel");
+//    customerInvoiceTable.add(cancel);
+//
+//
+//
+//    add(mainPanel);
 
-    cancel = new JButton("Cancel");
-    customerInvoiceTable.add(cancel);
-    add(mainPanel);
     //Form
-//    setSize(1000, 600);
-//    setLocation(0, 0);
-    Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
-    setMaximumSize(DimMax);
-
-    setExtendedState(JFrame.MAXIMIZED_BOTH);
+    setSize(1000, 600);
+    setLocation(0, 0);
+//    Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
+//    setMaximumSize(DimMax);
+//
+//    setExtendedState(JFrame.MAXIMIZED_BOTH);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
 }
@@ -146,8 +313,8 @@ public void setFormLayout(){
 
         super("Design Preview (New Form)");
 
+        this.initComponents();
         setFormLayout();
-
 
         dtm = new DefaultTableModel(0, 0);
 
@@ -223,6 +390,9 @@ public void setFormLayout(){
         cancel.setActionCommand("cancel");
 
 
+
+        deleteDetails.addActionListener(this);
+        deleteDetails.setActionCommand("deleteDetails");
 
 
 
@@ -346,6 +516,8 @@ public void setFormLayout(){
             case "NewInvoice":
                 creatNewInvoice();
                 break;
+//            case "deleteDetails":
+//                controller.deleteDetails(detailsModelTable,invoiceItems);
 
         }
 
