@@ -40,6 +40,8 @@ public class FormDesign extends JFrame implements ActionListener {
     private String detailsFilePath;
     private JButton deleteDetails;
     private JButton addDetails;
+    private JButton AddItem;
+    private JButton deleteItem;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -88,6 +90,10 @@ private void ClearTextData(){
         loadFileItem = new JMenuItem();
         SaveFileItem = new JMenuItem();
 
+        AddItem = new JButton();
+        deleteItem = new JButton();
+
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(invoiceTable);
@@ -112,6 +118,10 @@ private void ClearTextData(){
 
 
         jLabel6.setText("Invoice Number");
+
+        AddItem.setText("Add Item");
+
+        deleteItem.setText("Delete Item");
 
         addDetails.setText("Add Details");
 
@@ -152,23 +162,31 @@ private void ClearTextData(){
                                                 .addComponent(saveUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel2)
                                                         .addComponent(jLabel3)
                                                         .addComponent(jLabel4)
-                                                        .addComponent(jLabel6))
-                                                .addGap(109, 109, 109)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(invoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                                        .addComponent(customerName)
+                                                        .addComponent(jLabel6)
+                                                        .addComponent(AddItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(invoiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(29, 29, 29))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                                .addGap(28, 28, 28)
-                                                                .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                                                .addGap(41, 41, 41)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(invoiceDate, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                                                        .addComponent(customerName)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                                                .addComponent(invoiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(29, 29, 29))
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                                .addGap(28, 28, 28)
+                                                                                .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(deleteItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -199,8 +217,12 @@ private void ClearTextData(){
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(invoiceSum, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel4))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(AddItem)
+                                                        .addComponent(deleteItem))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(saveUpdate)
@@ -209,7 +231,7 @@ private void ClearTextData(){
         );
 
         pack();
-    }// </editor-fold>
+    }// </editor-fold>`
 public void setFormLayout(){
 
 
@@ -394,7 +416,11 @@ public void setFormLayout(){
         deleteDetails.addActionListener(this);
         deleteDetails.setActionCommand("deleteDetails");
 
+        AddItem.addActionListener(this);
+        AddItem.setActionCommand("AddItem");
 
+        deleteItem.addActionListener(this);
+        deleteItem.setActionCommand("deleteItem");
 
     }
 
@@ -435,6 +461,53 @@ public void setFormLayout(){
     }
 
 
+    public void saveInvoice(InvoiceHeader data) {
+
+
+            controller.addToMyListdata(data);
+
+
+
+
+        controller.savefile(mainFilePath);
+        dtm.setNumRows(0);
+
+        for (int i = 0; i <controller.myListLength(); i++) {
+            InvoiceHeader tableRow = controller.myListValues(i);
+            dtm.addRow(tableRow.getArray());
+        }
+        invoice.setVisible(false);
+    }
+
+
+    public void saveItem(InvoiceItems data) {
+
+
+        controller.addToListDetails(data);
+
+
+
+
+        controller.savefile(mainFilePath);
+        detailsModelTable.setNumRows(0);
+
+        for (int i = 0; i <controller.myInvoiceListItemLength(); i++) {
+            InvoiceItems tableRow = controller.myInvoiceItems(i);
+            if(data.invoiceNumber==tableRow.invoiceNumber) {
+                detailsModelTable.addRow(tableRow.getDetailed());
+            }
+        }
+        dtm.setNumRows(0);
+       controller.RefreshInvoiceTable(dtm);
+       item.setVisible(false);
+    }
+
+    public void saveDetailstoPath(){
+        controller.savefile(mainFilePath);
+        dtm.setNumRows(0);
+        controller.RefreshInvoiceTable(dtm);
+        item.setVisible(false);
+    }
     public void saveUpdate() {
 
 
@@ -478,9 +551,17 @@ public void setFormLayout(){
                 tableData[i][j] = dtm.getValueAt(i,j);
         return tableData;
     }
-
+      NewInvoice invoice = new NewInvoice();
     public void creatNewInvoice(){
-    action = actions.save;
+
+
+        invoice.setVisible(true);
+
+        invoice.initComponents(this,controller.myListLength()+1);
+
+
+
+        action = actions.save;
 //        int count=0;
 //        for (int i = 1; i <= controller.myListLength(); i++){
 //
@@ -495,6 +576,24 @@ public void setFormLayout(){
 
 
             }
+     NewItem item = new NewItem();
+            public void createNewItem(){
+         int dataId;
+                int selectedRow = invoiceTable.getSelectedRow();
+                dataId = (int)invoiceTable.getValueAt(selectedRow, 0);
+
+
+             item.setVisible(true);
+             item.initComponents(this,dataId);
+
+            }
+
+    public void deleteItem(){
+
+          controller.deleteItemRow(detailsModelTable,invoiceItems);
+        saveDetailstoPath();
+
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -515,6 +614,12 @@ public void setFormLayout(){
                 break;
             case "NewInvoice":
                 creatNewInvoice();
+                break;
+            case "AddItem":
+                createNewItem();
+                break;
+            case "deleteItem":
+                deleteItem();
                 break;
 //            case "deleteDetails":
 //                controller.deleteDetails(detailsModelTable,invoiceItems);

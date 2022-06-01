@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class OperationController {
     private String mainFilePath;
@@ -42,18 +43,7 @@ public class OperationController {
                 myList.add(invoice);
             }
 
-            double counter = 0;
-            for (int i = 0; i < myList.toArray().length; i++) {
-                InvoiceHeader tableRow = myList.get(i);
-
-                counter= (double)
-                        listDetails.stream().
-                                filter(listRow -> listRow.invoiceNumber == tableRow.InvoiceNumber)
-                                .map((list)->list.numberOfItemsPurchased*list.itemPrice).mapToDouble(Float::doubleValue).sum();
-
-                tableRow.totalInvoice =(float) counter;
-                dtm.addRow(tableRow.getArray());
-            }
+            RefreshInvoiceTable(dtm);
 
 
 
@@ -115,6 +105,29 @@ public class OperationController {
 
     }
 
+    public void deleteItemRow(DefaultTableModel detailsModelTable, JTable invoiceItems) {
+        int action = JOptionPane.showConfirmDialog(null, "Do you want Really to delete This Item", "Delete", JOptionPane.CANCEL_OPTION);
+        if (action == 0) {
+            int rowId;
+            int selectedRow;
+            selectedRow = invoiceItems.getSelectedRow();
+            rowId = (int) invoiceItems.getValueAt(selectedRow, 0);
+            String name = (String) invoiceItems.getValueAt(selectedRow, 1);
+            float price = (float) invoiceItems.getValueAt(selectedRow, 2);
+            int count = (int) invoiceItems.getValueAt(selectedRow, 3);
+            if (selectedRow != -1) {
+                detailsModelTable.removeRow(selectedRow);
+            }
+            listDetails = listDetails.stream().filter(
+                    listRow ->
+                        !(listRow.invoiceNumber == rowId &&  listRow.itemName== name
+                                && listRow.itemPrice == price
+                                &&  listRow.numberOfItemsPurchased == count)
+                    ).toList();
+
+
+        }
+    }
 
     public void deleteRow(DefaultTableModel detailsModelTable,JTable invoiceTable,DefaultTableModel dtm) {
         int action = JOptionPane.showConfirmDialog(null, "Do you want Really to delete", "Delete", JOptionPane.CANCEL_OPTION);
@@ -214,7 +227,27 @@ public int myListLength(){
 
 
     }
+    public void addToListDetails(InvoiceItems data){
 
+        listDetails.add(data);
+
+
+    }
+public void RefreshInvoiceTable(DefaultTableModel dtm)
+    {
+        double counter = 0;
+        for (int i = 0; i < myList.toArray().length; i++) {
+            InvoiceHeader tableRow = myList.get(i);
+
+            counter= (double)
+                    listDetails.stream().
+                            filter(listRow -> listRow.invoiceNumber == tableRow.InvoiceNumber)
+                            .map((list)->list.numberOfItemsPurchased*list.itemPrice).mapToDouble(Float::doubleValue).sum();
+
+            tableRow.totalInvoice =(float) counter;
+            dtm.addRow(tableRow.getArray());
+        }
+    }
 
 //    public void deleteDetails(DefaultTableModel detailsModelTable,JTable invoiceItems) {
 //        int action = JOptionPane.showConfirmDialog(null,"Do you want Really to delete","Delete",JOptionPane.CANCEL_OPTION);
